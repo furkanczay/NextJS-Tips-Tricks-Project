@@ -35,7 +35,8 @@ const UserSchema = new Schema({
         required: [true, 'Şifre alanı zorunludur.'],
         maxlength: [20, 'Şifre alanı en fazla 20 karakter olabilir.'],
         minlength: [8, 'Şifre alanı en az 8 karakter olabilir.'],
-        match: [/^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8}$/, 'Şifreniz en az 1 büyük harf, 1 küçük harf, 1 rakam ve 1 özel karakter içermelidir.']
+        match: [/^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8}$/, 'Şifreniz en az 1 büyük harf, 1 küçük harf, 1 rakam ve 1 özel karakter içermelidir.'],
+        select: false
     },
     role: {
         type: String,
@@ -82,3 +83,5 @@ const UserSchema = new Schema({
         type: Date
     }
 });
+
+export default mongoose.models.User || mongoose.model('User', UserSchema);
