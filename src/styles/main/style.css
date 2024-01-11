@@ -1,0 +1,25 @@
+.main-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn{
+    padding: 8px 13px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    background-color: #111;
+    transition: .3s ease-in-out;
+}
+.btn:hover{
+    background-color: #333;
+}
+
+.register-btn{
+    background-color: #2ecc71;
+}
+.register-btn:hover{
+    background-color: #27ae60;
+}
