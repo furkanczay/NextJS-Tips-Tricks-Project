@@ -5,6 +5,7 @@ import Credentials from "next-auth/providers/credentials"
 import { encode, decode } from "next-auth/jwt"
 import { checkUserPassword } from "@/libs/auth"
 import dbConnect from "@/libs/database/dbConnect"
+import { NextResponse } from "next/server"
 await dbConnect();
 
 const handler = NextAuth({
@@ -30,14 +31,12 @@ const handler = NextAuth({
     })
   ],
   callbacks: {
-    session: async ({ session, user, token }) => {
+    session: async ({ session, token }) => {
         if(token){
             session.user.id = token.id;
             session.user.username = token.username;
             session.user.email = token.email;
             session.user.role = token.role;
-            session.accessToken = token.accessToken;
-            session.refreshToken = token.refreshToken;
         }
         return session;
     },
@@ -49,7 +48,7 @@ const handler = NextAuth({
             token.role = user.role;
         }
         return token;
-    }
+    },
   },
   session: {
     strategy: "jwt",
