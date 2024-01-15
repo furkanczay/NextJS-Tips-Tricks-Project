@@ -33,7 +33,7 @@ const ArticleSchema = new Schema({
         ref: 'User',
         required: [true, "Kullanıcı alanı zorunludur."]
     },
-});
+}, { toJSON: { virtuals: true } });
 
 ArticleSchema.methods.makeSlug = function () {
     const slug = slugify(this.title);
@@ -46,5 +46,19 @@ ArticleSchema.pre('save', function (next) {
     this.slug = this.makeSlug();
     next();
 });
+
+ArticleSchema.virtual('comments', {
+    ref: 'Comment',
+    localField: '_id',
+    foreignField: 'article',
+    justOne: false
+});
+
+ArticleSchema.virtual('comments_count', {
+    ref: 'Comment',
+    localField: '_id',
+    foreignField: 'article',
+    count: true
+})
 
 export default mongoose.models.Article || mongoose.model('Article', ArticleSchema);
