@@ -23,13 +23,10 @@ const ArticleSchema = new Schema({
     updatedAt: {
         type: Date
     },
-    featuredImage: {
-        type: String,
-        default: 'default-featured.jpg'
-    },
     categories: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category'
+        ref: 'Category',
+        required: [true, "En az bir kategori eklenmesi gerekir."]
     }],
     author: {
         type: mongoose.Schema.Types.ObjectId,
@@ -40,6 +37,7 @@ const ArticleSchema = new Schema({
 
 ArticleSchema.methods.makeSlug = function () {
     const slug = slugify(this.title);
+    return slug;
 }
 ArticleSchema.pre('save', function (next) {
     if (!this.isModified('title')) {
