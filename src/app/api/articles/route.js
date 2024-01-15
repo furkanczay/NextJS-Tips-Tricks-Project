@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 export async function GET(request){
     await dbConnect();
     try{
-        const articles = await Article.find({}).populate('author').populate('categories');
+        const articles = await Article.find({}).populate('author', 'firstName lastName email username profile_image').populate('categories');
         return NextResponse.json({success: true, data: articles});
     }catch(error){
         console.log(error);
