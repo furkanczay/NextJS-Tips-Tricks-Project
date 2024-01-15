@@ -6,15 +6,18 @@ import Category from '@/models/Category';
 
 async function getData(){
   await dbConnect();
-  const res = await Article.find({}).populate('author').populate('categories');
-  if(!res){
-    throw new Error('Failed to fetch data');
+  try{
+    const res = await Article.find({}).populate({path: 'author'}).lean();
+    console.log(res);
+    return res;
+  }catch(error){
+    return error;
   }
-  return res;
 }
 
 export default async function Home() {
   const data = await getData();
+  console.log(data);
   return (
     <Homepage data={data}/>
   )
