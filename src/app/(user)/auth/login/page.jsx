@@ -3,11 +3,16 @@ import React from 'react'
 import { signIn } from 'next-auth/react'
 
 const LoginPage = () => {
-  function handleLogin(e){
+  async function handleLogin(e){
     e.preventDefault()
     const username = e.target.username.value
     const password = e.target.password.value
-    signIn('credentials', { username, password })
+    try{
+      await signIn('credentials', { redirect: false, username, password })
+    }catch(e){
+      console.log(e)
+    }
+    
   }
   return (
     <form onSubmit={handleLogin}>
