@@ -36,10 +36,6 @@ const ArticleSchema = new Schema({
         ref: 'User',
         required: [true, "Kullanıcı alanı zorunludur."]
     },
-    tags: {
-        type: Array,
-        
-    }
 });
 
 ArticleSchema.methods.makeSlug = function () {
