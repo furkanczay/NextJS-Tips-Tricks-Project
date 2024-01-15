@@ -20,18 +20,20 @@ export default function Homepage({ data }) {
             <SuggestionsMenu />
             <div className="suggestions">
                 <div className="suggestionsHeader">
-                    <div className="suggest">
-                        <img src="/images/vector.svg" alt="Vector Icon" />
-                        <h3>{data.length} Suggestions</h3>
-                    </div>
-                    <div className="sortBy">
-                        <p>Sort By :</p>
-                        <select name="" id="">
-                            <option value="">Most Upvotes</option>
-                            <option value="">Least Upvotes</option>
-                            <option value="">Most Comments</option>
-                            <option value="">Least Comments</option>
-                        </select>
+                    <div className="headerLeftSide">
+                        <div className="suggest">
+                            <img src="/images/vector.svg" alt="Vector Icon" />
+                            <h3>{`${data.length} Suggestions`}</h3>
+                        </div>
+                        <div className="sortBy">
+                            <p>Sort By :</p>
+                            <select name="" id="">
+                                <option value="">Most Upvotes</option>
+                                <option value="">Least Upvotes</option>
+                                <option value="">Most Comments</option>
+                                <option value="">Least Comments</option>
+                            </select>
+                        </div>
                     </div>
                     <button>+ Add Feedback</button>
                 </div>
@@ -46,16 +48,24 @@ export default function Homepage({ data }) {
                 }
 
                 {
-                    data.map((data) => (
-                        <div className="suggestionsList" key={data.id}>
-                            <div className="rank">
-                                <img src="/images/arrow-up.svg" alt="Up Arrow" />
-                                <p>{data.rank}</p>
-                            </div>
-                            <div className="tipsAndTricks">
-                                <h3>{data.title}</h3>
-                                <p>{data.description}</p>
-                                <h4>{data.category}</h4>
+                    data.map((data, index) => (
+                        <div className="suggestionsList" key={index}>
+                            <div className="suggestion">
+                                <div className="rank">
+                                    <img src="/images/arrow-up.svg" alt="Up Arrow" />
+                                    {data.likes && 
+                                        <p>{data.rank}</p>
+                                    }
+                                </div>
+                                <div className="tipsAndTricks">
+                                    <h3>{data.title}</h3>
+                                    <p>{data.content}</p>
+                                    <div className="category">
+                                        {data.categories && data.categories.map((category, index) => (
+                                            <h4 key={index}>{category}</h4>
+                                        ))}
+                                    </div>    
+                                </div>
                             </div>
                             <div className="comment">
                                 <img src="/images/comment-icon.svg" alt="Comment Icon" />
