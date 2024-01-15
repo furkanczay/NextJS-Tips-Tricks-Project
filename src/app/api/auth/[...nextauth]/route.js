@@ -69,6 +69,13 @@ const handler = NextAuth({
         return decodedToken;
     }
   },
+  pages: {
+    signIn: "/auth/login",
+    signOut: "/auth/logout",
+    error: "/auth/error",
+    verifyRequest: "/auth/verify-request",
+    newUser: "/auth/new-user"
+  },
   secret: getJwtSecretKey()
 })
 
