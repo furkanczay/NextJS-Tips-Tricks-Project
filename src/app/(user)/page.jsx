@@ -7,6 +7,9 @@ import { Suspense, useEffect, useState } from "react"
 
 export default function Home() {
     const [data, setData] = useState([])
+    const [selectedCategory, setSelectedCategory] = useState("All")
+    const [filteredData, setFilteredData] = useState([])
+    
     useEffect(() => {
     async function getData(){
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/articles`);
@@ -17,11 +20,21 @@ export default function Home() {
     getData();
     }, [])
 
-    console.log(data)
+    useEffect(() => {
+        if (selectedCategory === "All") {
+            setFilteredData(data);
+        } else {
+            setFilteredData(data.filter((item) => 
+                item.categories.some((category) => category.name === selectedCategory)
+            ));
+        }
+    }, [selectedCategory, data]);
+
+
   return (
     <>  
         <div className="container">
-            <SuggestionsMenu />
+            <SuggestionsMenu setSelectedCategory={setSelectedCategory} />
             <div className="suggestions">
                 <div className="suggestionsHeader">
                     <div className="headerLeftSide">
@@ -42,7 +55,7 @@ export default function Home() {
                     <button>+ Add Feedback</button>
                 </div>
                 
-                {data && data.length === 0 ?
+                {filteredData && filteredData.length === 0 ?
                     <div className="suggestionsEmptyList">
                         <img src="/images/empty-icon.png" alt="Empty Icon" />
                         <h3>There is no feedback yet.</h3>
@@ -50,7 +63,7 @@ export default function Home() {
                         <button>+ Add Feedback</button>
                     </div>
                     :
-                    <Suggestions data={data} />     
+                    <Suggestions filteredData={filteredData} />     
                 }
                 
             </div>

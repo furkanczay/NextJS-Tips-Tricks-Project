@@ -1,4 +1,10 @@
-export default function SuggestionsMenu() {
+export default function SuggestionsMenu( {setSelectedCategory} ) {
+
+    function handleClick(e) {
+        e.preventDefault();
+        setSelectedCategory(e.target.innerText);
+    }
+    
     return (
         <>
             <div className="suggestionsMenu">
@@ -6,13 +12,13 @@ export default function SuggestionsMenu() {
                     <h3>Frontend Mentor</h3>
                     <p>Feedback Board</p>
                 </div>
-                <div className="tags">
+                <div onClick={handleClick} className="tags">
                     <p>All</p>
-                    <p>UI</p>
+                    <p>HTML</p>
                     <p>UX</p>
-                    <p>Enhancement</p>
+                    <p>JS</p>
                     <p>Bug</p>
-                    <p>Feature</p>
+                    <p>CSS</p>
                 </div>
                 <div className="roadmapView">
                     <div className="roadmap">
