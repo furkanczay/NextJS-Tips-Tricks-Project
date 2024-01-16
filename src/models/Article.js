@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import slugify from "@/helpers/slugGenerator";
+import Comment from "./Comment";
 
 const Schema = mongoose.Schema;
 
@@ -60,5 +61,10 @@ ArticleSchema.virtual('comments_count', {
     foreignField: 'article',
     count: true
 })
+
+ArticleSchema.pre('deleteOne', { document: false, query: true }, async function() {
+    const doc = await this.model.findOne(this.getFilter());
+    await Comment.deleteMany({ article: doc._id });
+});
 
 export default mongoose.models.Article || mongoose.model('Article', ArticleSchema);

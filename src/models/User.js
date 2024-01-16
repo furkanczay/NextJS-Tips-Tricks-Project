@@ -98,4 +98,9 @@ UserSchema.pre("save", function(next){
     next();
 })
 
+UserSchema.pre('deleteOne', { document: false, query: true }, async function() {
+    const doc = await this.model.findOne(this.getFilter());
+    await Comment.deleteMany({ author: doc._id });
+});
+
 export default mongoose.models.User || mongoose.model('User', UserSchema);
