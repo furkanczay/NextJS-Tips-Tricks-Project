@@ -31,7 +31,7 @@ const ArticleDetailPage = ({ data_backend }) => {
       <div className="suggestionsList">
           <div className="suggestion">
               <div className="rank">
-                  <img src="/images/arrow-up.svg" alt="Up Arrow" />
+                  <Image src="/images/arrow-up.svg" alt="Up Arrow" width={20} height={20} />
                   {data.likes && 
                       <p>{data.rank}</p>
                   }
