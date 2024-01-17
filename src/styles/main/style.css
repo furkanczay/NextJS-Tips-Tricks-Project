@@ -13,6 +13,12 @@ body {
   background: #F7F8FD;
 }
 
+.mainHeader {
+  width: 80%;
+  margin: 0 auto;
+  border: 3px solid lightcoral;
+}
+
 .container {
   display: grid;
   grid-template-columns: 1fr 3fr;

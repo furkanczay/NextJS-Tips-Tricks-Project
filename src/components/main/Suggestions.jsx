@@ -1,11 +1,11 @@
 import Link from "next/link"
 
-export default function Suggestions({ data }) {
+export default function Suggestions({ filteredData }) {
 
     return (
         <>
             {
-                data.map((data, index) => (
+                filteredData.map((data, index) => (
                     <div className="suggestionsList" key={index}>
                         <div className="suggestion">
                             <div className="rank">
@@ -32,6 +32,5 @@ export default function Suggestions({ data }) {
                 ))
             }
         </>
-
     )
 }
