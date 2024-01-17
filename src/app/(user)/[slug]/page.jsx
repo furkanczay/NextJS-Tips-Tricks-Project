@@ -14,7 +14,6 @@ export default function DetailPage() {
         async function getData(){
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/articles/${slug}`);
             const r = await res.json();
-
             setData(r.data);
         }
         getData();
@@ -65,7 +64,7 @@ console.log(data)
                 <h1>4 Comments</h1>
 
                 {
-                    data.comments.map((comment, index) => (
+                    data.comments && data.comments.map((comment, index) => (
                         <div className="comment" key={index}>
                             <span></span>
                             <div className="commentContent">
