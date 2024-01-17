@@ -1,9 +1,10 @@
 "use client"
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const ArticleDetailPage = ({ data_backend }) => {
-      const [data, setData] = useState([])
+      const [data, setData] = useState({})
       const [countChar, setCountChar] = useState(0)
 
       useEffect(() => {
@@ -53,16 +54,16 @@ const ArticleDetailPage = ({ data_backend }) => {
 
 
       <div className="comments">
-          <h1>4 Comments</h1>
+          <h1>{data?.comments?.length} Comments</h1>
 
           {
               data.comments && data.comments.map((comment, index) => (
                   <div className="comment" key={index}>
-                      <span></span>
+                      <span><Image src={`/${comment.user.profile_image}`} width={50} height={50} alt={`${comment.user.username} avatar`} /></span>
                       <div className="commentContent">
                           <div className="user">
-                              <h2>Firstname Lastname</h2>
-                              <p>@Username</p>    
+                              <h2>{comment.user.firstName} {comment.user.lastName}</h2>
+                              <p>@{comment.user.username}</p>    
                           </div>
                           <p>{comment.detail}</p>
                       </div>

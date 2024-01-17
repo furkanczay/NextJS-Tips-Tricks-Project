@@ -8,7 +8,12 @@ export async function GET(request, { params }){
       const { slug } = params;
       try{
             await dbConnect();
-            const article = await Article.findOne({slug}).populate('author', 'username email firstName lastName profile_image').populate('comments', 'fullname email detail user -article').populate('categories', 'name slug');
+            const article = await Article.findOne({slug}).populate('author', 'username email firstName lastName profile_image').populate({
+                  path: 'comments',
+                  populate: {
+                        path: 'user'
+                  }
+            }).populate('categories', 'name slug');
             if(!article){
                   return NextResponse.json({ success: false }, { status: 400 })
             }
