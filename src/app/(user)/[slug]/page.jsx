@@ -9,19 +9,17 @@ export default function DetailPage() {
     const [countChar, setCountChar] = useState(0)
 
     const { slug } = useParams();
-    console.log(slug)
 
     useEffect(() => {
         async function getData(){
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/articles/${slug}`);
             const r = await res.json();
 
-            setData(r);
+            setData(r.data);
         }
         getData();
     }, []) 
 
-    console.log(data)
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -29,7 +27,7 @@ export default function DetailPage() {
     }
 
 
-
+console.log(data)
 
     return (
         <div className="detailContainer">
@@ -47,7 +45,7 @@ export default function DetailPage() {
                         }
                     </div>
                     <div className="tipsAndTricks">
-                        <h3><Link href={`/${data.slug}`}>{data.title}</Link></h3>
+                        <h3>{data.title}</h3>
                         <p>{data.content}</p>
                         <div className="category">
                             {data.categories && data.categories.map((category, index) => (
@@ -66,46 +64,20 @@ export default function DetailPage() {
             <div className="comments">
                 <h1>4 Comments</h1>
 
-                <div className="comment">
-                    <span></span>
-                    <div className="commentContent">
-                        <div className="user">
-                            <h2>Firstname Lastname</h2>
-                            <p>@Username</p>    
+                {
+                    data.comments.map((comment, index) => (
+                        <div className="comment" key={index}>
+                            <span></span>
+                            <div className="commentContent">
+                                <div className="user">
+                                    <h2>Firstname Lastname</h2>
+                                    <p>@Username</p>    
+                                </div>
+                                <p>{comment.detail}</p>
+                            </div>
                         </div>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tenetur deleniti voluptates eum laboriosam temporibus quaerat itaque distinctio numquam. Libero esse, blanditiis rerum quis ipsa tenetur in mollitia dignissimos exercitationem tempore.</p>
-                    </div>
-                </div>
-                <div className="comment">
-                    <span></span>
-                    <div className="commentContent">
-                        <div className="user">
-                            <h2>Firstname Lastname</h2>
-                            <p>@Username</p>    
-                        </div>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tenetur deleniti voluptates eum laboriosam temporibus quaerat itaque distinctio numquam. Libero esse, blanditiis rerum quis ipsa tenetur in mollitia dignissimos exercitationem tempore.</p>
-                    </div>
-                </div>
-                <div className="comment">
-                    <span></span>
-                    <div className="commentContent">
-                        <div className="user">
-                            <h2>Firstname Lastname</h2>
-                            <p>@Username</p>    
-                        </div>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tenetur deleniti voluptates eum laboriosam temporibus quaerat itaque distinctio numquam. Libero esse, blanditiis rerum quis ipsa tenetur in mollitia dignissimos exercitationem tempore.</p>
-                    </div>
-                </div>
-                <div className="comment">
-                    <span></span>
-                    <div className="commentContent">
-                        <div className="user">
-                            <h2>Firstname Lastname</h2>
-                            <p>@Username</p>    
-                        </div>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tenetur deleniti voluptates eum laboriosam temporibus quaerat itaque distinctio numquam. Libero esse, blanditiis rerum quis ipsa tenetur in mollitia dignissimos exercitationem tempore.</p>
-                    </div>
-                </div>
+                    ))
+                }
             </div>    
 
 
