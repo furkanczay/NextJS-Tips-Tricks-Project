@@ -25,7 +25,7 @@ export default function Suggestions({ data }) {
                             </div>
                         </div>
                         <div className="comment">
-                            <img src="/images/comment-icon.svg" alt="Comment Icon " />
+                            <img src="/images/comment-icon.svg" alt="Comment Icon" />
                             <p>{data.comments}</p>
                         </div>
                     </div>
