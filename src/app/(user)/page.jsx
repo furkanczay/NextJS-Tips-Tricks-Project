@@ -9,13 +9,14 @@ export default function Home() {
     const [data, setData] = useState([])
     const [selectedCategory, setSelectedCategory] = useState("All")
     const [filteredData, setFilteredData] = useState([])
+    const [loading, setLoading] = useState(true);
     
     useEffect(() => {
     async function getData(){
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/articles`);
         const r = await res.json();
-        console.log(r);
         setData(r.data);
+        setLoading(false);
     }
     getData();
     }, [])
@@ -54,17 +55,24 @@ export default function Home() {
                     </div>
                     <button>+ Add Feedback</button>
                 </div>
-                
-                {filteredData && filteredData.length === 0 ?
+                {loading && (
+                    <p>Loading...</p>
+                )}
+                {filteredData && (
+                    <Suggestions filteredData={filteredData} /> 
+                )}
+                    
+                {!loading && filteredData.length === 0 && (
                     <div className="suggestionsEmptyList">
                         <img src="/images/empty-icon.png" alt="Empty Icon" />
                         <h3>There is no feedback yet.</h3>
                         <p>Got a suggestion? Found a bug that needs to be squashed? We love hearing about new ideas to improve our app.</p>
                         <button>+ Add Feedback</button>
                     </div>
-                    :
-                    <Suggestions filteredData={filteredData} />     
-                }
+                )}
+                    
+                        
+                
                 
             </div>
         </div>
