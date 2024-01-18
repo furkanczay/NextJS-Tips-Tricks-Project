@@ -4,7 +4,6 @@
 import SuggestionsMenu from "@/components/main/suggestionsMenu";
 import Suggestions from "@/components/main/suggestions";
 import { Suspense, useEffect, useState } from "react"
-import Footer from "@/components/main/Footer";
 
 export default function Home() {
     const [data, setData] = useState([])
@@ -77,7 +76,6 @@ export default function Home() {
                 
             </div>
         </div>
-        <Footer />
     </>      
   );
 }
