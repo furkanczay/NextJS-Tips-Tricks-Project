@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import Article from "@/models/Article";
 import dbConnect from "@/libs/database/dbConnect";
-import { getToken } from "next-auth/jwt";
-import { getJwtSecretKey } from "@/helpers/jwtHelper";
 
 export async function POST(request) {
     
