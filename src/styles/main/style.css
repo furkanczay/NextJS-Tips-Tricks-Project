@@ -8,7 +8,7 @@
 
 a {text-decoration: none;}
 
-body {
+body, .mainHeader {
   font-family: 'Jost', sans-serif;
   background: #F7F8FD;
 }
@@ -16,7 +16,96 @@ body {
 .mainHeader {
   width: 80%;
   margin: 0 auto;
-  border: 3px solid lightcoral;
+  display: flex;
+  padding: 20px 20px;
+  justify-content: space-between;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background: linear-gradient(60deg, #E84D70, #A337F6, #28A7ED);
+
+  & h1 {
+    color: #FFF;
+    font-family: Jost;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.25px;
+    border-bottom: 1px solid #FFF;
+  }
+
+  & .navBar {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+
+    & .navs {
+      color: #FFF;
+      font-family: Jost;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: normal;
+      letter-spacing: -0.25px;
+
+      &:hover {
+        border-bottom: 2px solid #FFF;
+      }
+    }
+  }
+  
+  & input {
+    width: 20%;
+    border-radius: 10px;
+    transition: transform 2s;
+    text-align: center;
+    border: none;
+
+    &:hover {
+      transform: rotateY(360deg);
+    }
+  }
+
+  & .logSign {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    & .logIn {
+      border-radius: 5px;
+      background: #AD1FEA;
+      color: #fff;
+      padding: 8px 12px;
+      color: #F2F4FE;
+      font-family: Jost;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: normal;
+      cursor: pointer;
+
+      &:hover {
+        box-shadow: 0 0 20px 5px #C75AF6;
+        background-color: #C75AF6;
+      }
+    }
+
+    & .signUp {
+      border-radius: 5px;
+      background: #AD1FEA;
+      color: #fff;
+      padding: 8px 12px;
+      color: #F2F4FE;
+      font-family: Jost;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: normal; 
+      cursor: pointer;
+
+      &:hover {
+        box-shadow: 0 0 20px 5px #C75AF6;
+        background-color: #C75AF6;
+      }
+    }
+  }
 }
 
 .container {
@@ -196,6 +285,13 @@ body {
     background: #AD1FEA;
     color: #FFF;
     cursor: pointer;
+
+    color: #F2F4FE;
+    font-family: Jost;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
   }
 
   & button:hover {
@@ -508,5 +604,117 @@ body {
     }
   }
 
+}
+
+.footerMenu {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px 20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background: linear-gradient(60deg, #28A7ED, #A337F6, #E84D70);
+
+  & .footerTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    & .ttLogo {
+
+      border: 1px solid #FFF;
+      padding: 5px 10px;
+      border-radius: 5px;
+
+      & h1 {
+        color: #FFF;
+        font-family: Jost;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: -0.25px; 
+      }
+    }
+
+    & .navBar {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+  
+      & .navs {
+        color: #FFF;
+        font-family: Jost;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: -0.25px;
+  
+        &:hover {
+          border-bottom: 2px solid #FFF;
+        }
+      }
+    }
+
+    & .footerSocialMedia {
+      display: flex;
+      gap: 16px;
+      
+      & img {
+        cursor: pointer;
+        width: 16px;
+      }
+    }
+  }
+
+  & .footerBottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & .policy {
+      display: flex;
+      gap: 12px;
+      cursor: pointer;
+      align-items: center;
+
+      & .policyLink {
+        color: #0a0909;
+        font-family: Jost;
+        font-size: 10px;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: -0.25px; 
+      }
+    }
+
+    & .subscribe {
+      display: flex;
+      gap: 8px;
+
+      & input {
+        border: none;
+        border-radius: 5px;
+        padding: 8px 12px;
+      }
+
+      & button {
+        border-radius: 5px;
+        background: #AD1FEA;
+        padding: 8px 12px;
+        border: none;
+        color: #F2F4FE;
+        font-family: Jost;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: normal;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #C75AF6;
+        }
+      }
+    }
+  }
 }
 
