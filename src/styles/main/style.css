@@ -81,10 +81,12 @@ body, .mainHeader {
       font-weight: 600;
       line-height: normal;
       cursor: pointer;
+      transition: transform 2s;
 
       &:hover {
         box-shadow: 0 0 20px 5px #C75AF6;
         background-color: #C75AF6;
+        transform: rotateY(360deg);
       }
     }
 
@@ -709,9 +711,11 @@ body, .mainHeader {
         font-weight: 600;
         line-height: normal;
         cursor: pointer;
+        transition: transform 2s;
 
         &:hover {
           background-color: #C75AF6;
+          transform: rotateY(360deg);
         }
       }
     }
