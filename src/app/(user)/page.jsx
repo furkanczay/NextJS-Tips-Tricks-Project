@@ -3,13 +3,16 @@
 
 import SuggestionsMenu from "@/components/main/suggestionsMenu";
 import Suggestions from "@/components/main/suggestions";
-import { Suspense, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
+import { useSession } from "next-auth/react";
+import useAdmin from "@/hooks/useAdmin";
 
 export default function Home() {
     const [data, setData] = useState([])
     const [selectedCategory, setSelectedCategory] = useState("All")
     const [filteredData, setFilteredData] = useState([])
     const [loading, setLoading] = useState(true);
+    const isAdmin = useAdmin()
     
     useEffect(() => {
     async function getData(){
@@ -53,7 +56,7 @@ export default function Home() {
                             </select>
                         </div>
                     </div>
-                    <button>+ Add Feedback</button>
+                    {isAdmin && <button>+ Add Feedback</button>}
                 </div>
                 {loading && (
                     <p>Loading...</p>
