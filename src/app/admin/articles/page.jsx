@@ -1,5 +1,6 @@
 import Article from '@/models/Article'
 import User from '@/models/User'
+import Link from 'next/link';
 import React from 'react'
 
 const getData = async () => {
@@ -12,6 +13,7 @@ const ArticlesPage = async () => {
       console.log(articles);
   return (
     <div>
+      <Link href="/admin/articles/create" className='btn btn-primary'>Yeni Trick Ekle</Link>
       <table className='table table-hover table-borderless'>
             <thead>
                   <tr>
