@@ -4,18 +4,21 @@ import { NextResponse } from "next/server";
 import { adminRequiredURLs } from "./helpers/urlHelper";
 
 export default withAuth(
-  // `withAuth` augments your `Request` with the user's token.
   function middleware(req) {
     const { nextUrl, url, nextauth } = req;
     const isAdmin = nextauth.token?.role === 'admin'
     const isAdminRequired = adminRequiredURLs.some(url => nextUrl.pathname === url);
-    if(nextUrl.pathname.startsWith('/admin') || isAdminRequired){
+    if(nextUrl.pathname.startsWith('/admin')){
       if(!isAdmin){
         return NextResponse.redirect(new URL('/', url))
       }
       return NextResponse.next();
     }
-    if(nextUrl.pathname.startsWith('/api')){
+    if(isAdminRequired){
+      if(!isAdmin){
+        return NextResponse.json({success: false, error: 'Admin olmanız gerekiyor'}, { status: 400 });
+      }
+      NextResponse.next();
     }
 
   },
@@ -27,4 +30,4 @@ export default withAuth(
   }
 )
 
-export const config = { matcher: ["/admin/:path*", "/api/:path*"] }
+export const config = { matcher: ["/admin/:path*", "/api/articles/create"] }
