@@ -4,25 +4,55 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 const ArticleDetailPage = ({ data_backend }) => {
-      const [data, setData] = useState({})
-      const [countChar, setCountChar] = useState(0)
+    const [data, setData] = useState({})
+    const [countChar, setCountChar] = useState(0)
 
-      useEffect(() => {
-            async function getData(){
-                  setData(data_backend)
-            }
-            getData();
-      }, [data_backend]) 
+    useEffect(() => {
+        async function getData(){
+                setData(data_backend)
+        }
+        getData();
+    }, [data_backend]) 
 
-      console.log(data);
+
 
 
     function handleSubmit(e) {
         e.preventDefault();
         const formData = new FormData(e.target);
         const formObj = Object.fromEntries(formData);
-        
-        console.log(formObj.username.split(' '))
+        const firstname = formObj.username.split(' ')[0];
+        const lastname = formObj.username.split(' ')[1];
+        const detail = formObj.detail;
+        const email = formObj.email;
+        const article = data._id;
+        const fullname = formObj.username;
+        const username = formObj.username.split(' ').join('');
+        console.log(article);
+        console.log(firstname);
+        console.log(lastname);
+        console.log(detail);
+        console.log(email);
+
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/comments/create`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                article: article,
+                detail: detail,
+                fullname: fullname,
+                username: username,
+                firstname: firstname,
+                lastname: lastname,
+                email: email,
+            }),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+        })
     }
 
     // article = "65a61f60b7dbe60309d22266"
@@ -64,11 +94,20 @@ const ArticleDetailPage = ({ data_backend }) => {
             {
                 data.comments && data.comments.map((comment, index) => (
                     <div className="comment" key={index}>
-                        <span><Image src={`/${comment.user.profile_image}`} width={50} height={50} alt={`${comment.user.username} avatar`} /></span>
+                        { comment.user && <span><Image src={`/${comment.user.profile_image}`} width={50} height={50} alt={`${comment.user.username} avatar`} /></span>}
                         <div className="commentContent">
                             <div className="user">
-                                <h2>{comment.user.firstName} {comment.user.lastName}</h2>
-                                <p>@{comment.user.username}</p>    
+                                { comment.user ?
+                                    <>
+                                        <h2>{comment.firstName} {comment.lastName}</h2>
+                                        <p>@{comment.username}</p>
+                                    </>
+                                    :
+                                    <>
+                                        <h2>{comment.firstName} {comment.lastName}</h2>
+                                        <p>@{comment.username}</p>
+                                    </>
+                                } 
                             </div>
                             <p>{comment.detail}</p>
                         </div>
@@ -81,7 +120,7 @@ const ArticleDetailPage = ({ data_backend }) => {
         <div className="addComment">
             <h1>Add Comment</h1>
             <form onSubmit={handleSubmit}>
-                <input type="text" placeholder='username?' name='username' /> <br />
+                <input type="text" placeholder='name?, lastname?..' name='username' /> <br />
                 <input type="email" placeholder='email?' name='email' /> <br />
                 <textarea maxLength='250' type="text" name="detail" onChange={(e) => setCountChar(e.target.value.length)} />
                 <div className="formBottom">
