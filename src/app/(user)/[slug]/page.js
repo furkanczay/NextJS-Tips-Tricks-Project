@@ -1,18 +1,27 @@
 import ArticleDetailPage from "@/components/main/pages/ArticleDetailPage";
+import Article from "@/models/Article";
 import { notFound } from "next/navigation";
 
 
+
 async function getData(slug){
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/articles/${slug}`).then(res => res.json());
-    if(!response.success){
-      return notFound();
+    try{
+        const req = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/articles/${slug}`);
+        if(!req.ok){
+            throw new Error('HTTP Error')
+        }
+        const res = await req.json()
+        const article = res.data;
+        return article;
+    }catch(error){
+        console.log(error);
+        return notFound();
     }
-    return response.data;
     
 }
 
 
-export default async  function DetailPage({ params }) {
+export default async function DetailPage({ params }) {
     const { slug } = params;
     const data = await getData(slug)
 
