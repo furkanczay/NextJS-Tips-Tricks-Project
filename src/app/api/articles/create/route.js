@@ -1,18 +1,9 @@
 import { NextResponse } from "next/server";
 import Article from "@/models/Article";
 import dbConnect from "@/libs/database/dbConnect";
-import { getServerSession } from "next-auth";
-import { getToken } from "next-auth/jwt";
-import { getJwtSecretKey } from "@/helpers/jwtHelper";
 
 export async function POST(request) {
-    const token = await getToken({req: request, secret: getJwtSecretKey()});
-    if(!token || !token.role || token.role !== 'admin'){
-        return NextResponse.json({
-            success: false,
-            message: 'Yetkisiz kullanıcı!'
-        }, {status: 401});
-    }
+    
     const {title, content, categories, author} = await request.json();
     try{
         await dbConnect();

@@ -1,4 +1,4 @@
-import { useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -36,12 +36,15 @@ const AdminHeader = () => {
                 <input type="text" className="form-control form-control-sm" placeholder="Search" />
                 </form>
                 {session && (
-                    <span>{session?.user?.username}</span>
+                    <>
+                        <span>{session?.user?.username}</span>
+                        <button onClick={() => signOut()}>Çıkış Yap</button>
+                    </>
                 )}
             </div>
             </div>
         </div>
-        </nav>
+    </nav>
   )
 }
 
