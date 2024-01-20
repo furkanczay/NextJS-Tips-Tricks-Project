@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 
 export default function Suggestions({ filteredData }) {
@@ -12,7 +13,7 @@ export default function Suggestions({ filteredData }) {
                     <div className="suggestionsList" key={index}>
                         <div className="suggestion">
                             <div className="rank">
-                                <img src="/images/arrow-up.svg" alt="Up Arrow" />
+                                <Image src="/images/arrow-up.svg" alt="Up Arrow" width={20} height={20} />
                                 {data.likes && 
                                     <p>{data.rank}</p>
                                 }
@@ -30,6 +31,8 @@ export default function Suggestions({ filteredData }) {
                         <div className="comment">
                             <img src="/images/comment-icon.svg" alt="Comment Icon" />
                             <p>{data.comments_count}</p>
+                            <Image src="/images/comment-icon.svg" alt="Comment Icon" width={20} height={20} />
+                            <p>{data.comments}</p>
                         </div>
                     </div>
                 ))

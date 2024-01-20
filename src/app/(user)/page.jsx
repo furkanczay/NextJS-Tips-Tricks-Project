@@ -2,8 +2,9 @@
 
 import SuggestionsMenu from "@/components/main/suggestionsMenu";
 import Suggestions from "@/components/main/suggestions";
-import { Suspense, useEffect, useState } from "react"
-import Footer from "@/components/main/Footer";
+import { useEffect, useState } from "react"
+import { useSession } from "next-auth/react";
+import useAdmin from "@/hooks/useAdmin";
 
 export default function Home() {
     const [data, setData] = useState([])
@@ -16,8 +17,8 @@ export default function Home() {
     async function getData(){
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/articles`);
         const r = await res.json();
-        console.log(r);
         setData(r.data);
+        setLoading(false);
     }
     getData();
     }, [])
@@ -54,23 +55,29 @@ export default function Home() {
                             </select>
                         </div>
                     </div>
-                    <button>+ Add Feedback</button>
+                    {isAdmin && <button>+ Add Feedback</button>}
                 </div>
-                
-                {filteredData && filteredData.length === 0 ?
+                {loading && (
+                    <p>Loading...</p>
+                )}
+                {filteredData && (
+                    <Suggestions filteredData={filteredData} /> 
+                )}
+                    
+                {!loading && filteredData.length === 0 && (
                     <div className="suggestionsEmptyList">
                         <img src="/images/empty-icon.png" alt="Empty Icon" />
                         <h3>There is no feedback yet.</h3>
                         <p>Got a suggestion? Found a bug that needs to be squashed? We love hearing about new ideas to improve our app.</p>
                         <button>+ Add Feedback</button>
                     </div>
-                    :
-                    <Suggestions filteredData={filteredData} />     
-                }
+                )}
+                    
+                        
+                
                 
             </div>
         </div>
-        <Footer />
     </>      
   );
 }
