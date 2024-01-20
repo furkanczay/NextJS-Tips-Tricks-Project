@@ -1,6 +1,5 @@
 "use client"
 
-
 import SuggestionsMenu from "@/components/main/suggestionsMenu";
 import Suggestions from "@/components/main/suggestions";
 import { Suspense, useEffect, useState } from "react"
@@ -10,6 +9,8 @@ export default function Home() {
     const [data, setData] = useState([])
     const [selectedCategory, setSelectedCategory] = useState("All")
     const [filteredData, setFilteredData] = useState([])
+
+    // console.log(filteredData.forEach((item) => console.log(item.comments_count)))
     
     useEffect(() => {
     async function getData(){
