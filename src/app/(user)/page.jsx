@@ -1,7 +1,7 @@
 "use client"
 
 import SuggestionsMenu from "@/components/main/suggestionsMenu";
-import Suggestions from "@/components/main/suggestions";
+import Suggestions from "@/components/main/Suggestions";
 import { useEffect, useState } from "react"
 import useAdmin from "@/hooks/useAdmin";
 
