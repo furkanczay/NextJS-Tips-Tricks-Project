@@ -5,6 +5,9 @@ import Link from "next/link"
 
 export default function Suggestions({ filteredData }) {
 
+    console.log(filteredData.forEach((item) => console.log(item.comments_count)))
+    console.log(filteredData)
+
     return (
         <>
             {
@@ -28,6 +31,8 @@ export default function Suggestions({ filteredData }) {
                             </div>
                         </div>
                         <div className="comment">
+                            <img src="/images/comment-icon.svg" alt="Comment Icon" />
+                            <p>{data.comments_count}</p>
                             <Image src="/images/comment-icon.svg" alt="Comment Icon" width={20} height={20} />
                             <p>{data.comments_count}</p>
                         </div>
