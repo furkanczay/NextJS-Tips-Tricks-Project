@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
 
@@ -27,7 +29,7 @@ export default function Suggestions({ filteredData }) {
                         </div>
                         <div className="comment">
                             <Image src="/images/comment-icon.svg" alt="Comment Icon" width={20} height={20} />
-                            <p>{data.comments}</p>
+                            <p>{data.comments_count}</p>
                         </div>
                     </div>
                 ))
