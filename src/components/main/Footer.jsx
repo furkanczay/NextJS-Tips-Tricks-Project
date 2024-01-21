@@ -1,7 +1,15 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { useState } from 'react';
 
 export default function Footer() {
+
+    const [isInputVisible, setInputVisible] = useState(false);
+
+    const handleSearchClick = (e) => {
+        e.preventDefault();
+        setInputVisible(!isInputVisible);
+  };
     
     return (
         <>
@@ -10,9 +18,13 @@ export default function Footer() {
                     <div className="ttLogo">
                         <Link href={'/'}><h1>Tips & Tricks</h1></Link>
                     </div>
-                    <div className="navBar">
+                    <div className='searchInput' style={{ display: isInputVisible ? 'flex' : 'none' }}>
+                        <input type="search" autoComplete='off' placeholder='Aranacak kelime giriniz' />
+                        <button onClick={handleSearchClick}>X</button>
+                    </div>
+                    <div className="navBar" style={{ display: isInputVisible ? 'none' : 'flex' }}>
                         <Link href={'/'} className='navs'>Anasayfa</Link>
-                        <Link href={'#'} className='navs'>Arama</Link>
+                        <Link href={'#'} className='navs' onClick={handleSearchClick}>Arama</Link>
                         <Link href={'#'} className='navs'>Hakkımızda</Link>
                         <Link href={'#'} className='navs'>İletişim</Link>
                     </div>

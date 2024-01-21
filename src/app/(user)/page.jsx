@@ -1,5 +1,6 @@
 "use client"
 
+
 import SuggestionsMenu from "@/components/main/suggestionsMenu";
 import Suggestions from "@/components/main/suggestions";
 import { useEffect, useState } from "react"
@@ -10,8 +11,8 @@ export default function Home() {
     const [data, setData] = useState([])
     const [selectedCategory, setSelectedCategory] = useState("All")
     const [filteredData, setFilteredData] = useState([])
-
-    // console.log(filteredData.forEach((item) => console.log(item.comments_count)))
+    const [loading, setLoading] = useState(true);
+    const isAdmin = useAdmin()
     
     useEffect(() => {
     async function getData(){
@@ -58,7 +59,9 @@ export default function Home() {
                     {isAdmin && <button>+ Add Feedback</button>}
                 </div>
                 {loading && (
-                    <p>Loading...</p>
+                    <div className="loadingScreen">
+                        Loading
+                    </div>
                 )}
                 {filteredData && (
                     <Suggestions filteredData={filteredData} /> 
