@@ -5,6 +5,10 @@ export async function PUT(request, { params }){
       const { title, content } = await request.json()
       try{
             await dbConnect();
+            const articleExist = await Article.findOne({title});
+            if(articleExist){
+                  return NextResponse.json({ success: false, message: 'Böyle bir yazı daha önce paylaşılmış!' }, { status:400 })
+            } 
             const article = await Article.updateOne({slug: params.slug}, {
                   title,
                   content
