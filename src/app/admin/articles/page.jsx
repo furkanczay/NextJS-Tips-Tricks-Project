@@ -1,16 +1,28 @@
-import Article from '@/models/Article'
-import User from '@/models/User'
+"use client"
 import Link from 'next/link';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { toast } from 'sonner';
 
-const getData = async () => {
-      const articles = await Article.find().populate('author');
-      return articles;
-}
 
-const ArticlesPage = async () => {
-      const articles = await getData();
-      console.log(articles);
+const ArticlesPage = () => {
+      const [data, setData] = useState([]);
+      const [loading, setLoading] = useState(true)
+      useEffect(() => {
+            async function getData(){
+                  try{
+                        const request = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/articles`);
+                        const response = await request.json()
+                        if(!response.success){
+                              return toast.error(response.message);
+                        }
+                        setData(response.data);
+                        setLoading(false);
+                  }catch(error){
+                        console.log(error);
+                  }
+            }
+            getData();
+      }, [])
   return (
     <div>
       <Link href="/admin/articles/create" className='btn btn-primary'>Yeni Trick Ekle</Link>
@@ -25,7 +37,8 @@ const ArticlesPage = async () => {
                   </tr>
             </thead>
             <tbody className='table-group-divider'>
-                  {articles?.map((article, index) => (
+                  {loading && <tr><td>Loading...</td></tr>}
+                  {!loading && data?.map((article, index) => (
                         <tr key={index}>
                               <td>{article.title}</td>
                               <td>{article.slug}</td>

@@ -5,8 +5,7 @@ import { NextResponse } from "next/server"
 export default adminRoutes(
       // `withAuth` augments your `Request` with the user's token.
       function middleware(req) {
-        console.log('Admin');
-        console.log(req.nextauth.token);
+            NextResponse.next()
       },
       {
         callbacks: {

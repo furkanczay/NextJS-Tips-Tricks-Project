@@ -7,8 +7,7 @@ import { checkUserPassword } from "@/libs/auth"
 import dbConnect from "@/libs/database/dbConnect"
 import { NextResponse } from "next/server"
 await dbConnect();
-
-const handler = NextAuth({
+export const authOptions = {
   providers: [
     // Credentials Provider
     Credentials({
@@ -77,6 +76,8 @@ const handler = NextAuth({
     newUser: "/auth/new-user"
   },
   secret: getJwtSecretKey()
-})
+}
+
+const handler = NextAuth(authOptions)
 
 export { handler as GET, handler as POST }
