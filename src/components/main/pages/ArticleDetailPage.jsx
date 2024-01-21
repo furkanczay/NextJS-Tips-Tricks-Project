@@ -59,14 +59,29 @@ const ArticleDetailPage = ({ data_backend }) => {
           {
               data.comments && data.comments.map((comment, index) => (
                   <div className="comment" key={index}>
-                      <span><Image src={`/${comment.user.profile_image}`} width={50} height={50} alt={`${comment.user.username} avatar`} /></span>
-                      <div className="commentContent">
-                          <div className="user">
-                              <h2>{comment.user.firstName} {comment.user.lastName}</h2>
-                              <p>@{comment.user.username}</p>    
-                          </div>
-                          <p>{comment.detail}</p>
-                      </div>
+                      {comment.user ? (
+                        <>
+                            <span><Image src={`/${comment.user.profile_image}`} width={50} height={50} alt={`${comment.user.username} avatar`} /></span>
+                            <div className="commentContent">
+                                <div className="user">
+                                    <h2>{comment.user.firstName} {comment.user.lastName}</h2>
+                                    <p>@{comment.user.username}</p>    
+                                </div>
+                                <p>{comment.detail}</p>
+                            </div>
+                        </>
+                      ) : (
+                        <>
+                            <span><Image src={`/default-avatar.jpg`} width={50} height={50} alt={`${comment.fullname} avatar`} /></span>
+                            <div className="commentContent">
+                                <div className="user">
+                                    <h2>{comment.fullname}</h2>
+                                    <p>@{comment.email}</p>    
+                                </div>
+                                <p>{comment.detail}</p>
+                            </div>
+                        </>
+                      )}
                   </div>
               ))
           }
