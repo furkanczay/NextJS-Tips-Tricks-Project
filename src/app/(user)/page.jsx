@@ -3,10 +3,11 @@
 import SuggestionsMenu from "@/components/main/suggestionsMenu";
 import Suggestions from "@/components/main/suggestions";
 import { useEffect, useState } from "react"
-import { useSession } from "next-auth/react";
 import useAdmin from "@/hooks/useAdmin";
 
 export default function Home() {
+    const isAdmin = useAdmin()
+    const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
     const [selectedCategory, setSelectedCategory] = useState("All")
     const [filteredData, setFilteredData] = useState([])

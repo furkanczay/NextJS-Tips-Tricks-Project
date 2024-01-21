@@ -9,6 +9,7 @@ export async function POST(request){
       try{
             let comment;
             if(token){
+                  console.log('Buraya geldi');
                   comment = await Comment.create({
                         detail,
                         user: token.id,

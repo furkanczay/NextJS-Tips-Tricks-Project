@@ -8,7 +8,7 @@ export async function GET(request){
     await dbConnect();
     try{
         const articles = await Article.find({}).populate('author', 'firstName lastName email username profile_image -_id').populate('categories', 'name slug -_id').populate('comments_count');
-        return NextResponse.json({success: true, data: articles});
+        return NextResponse.json({success: true, data: articles.reverse()});
     }catch(error){
         console.log(error);
         return NextResponse.json({success: false, message: error});
