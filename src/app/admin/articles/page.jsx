@@ -1,12 +1,35 @@
 "use client"
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner';
 
 
 const ArticlesPage = () => {
+      const router = useRouter()
       const [data, setData] = useState([]);
       const [loading, setLoading] = useState(true)
+      const [refreshData, setRefreshData] = useState(false);
+      async function handleDelete(slug){
+            if(confirm('Silmek istediğinize emin misiniz?')){
+                  try{
+                        const request = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/articles/delete/${slug}`,
+                              {
+                                    method: 'DELETE'
+                              }
+                        );
+                        const response = await request.json();
+                        if(!response.success){
+                              toast.error(response.message)
+                        }
+                        toast.success(response.message);
+                        setRefreshData(true)
+                  }catch(error){
+                        console.log(error);
+                  }
+            }
+      }
+
       useEffect(() => {
             async function getData(){
                   try{
@@ -17,12 +40,13 @@ const ArticlesPage = () => {
                         }
                         setData(response.data);
                         setLoading(false);
+                        setRefreshData(false);
                   }catch(error){
                         console.log(error);
                   }
             }
             getData();
-      }, [])
+      }, [refreshData])
   return (
     <div>
       <Link href="/admin/articles/create" className='btn btn-primary'>Yeni Trick Ekle</Link>
@@ -45,8 +69,8 @@ const ArticlesPage = () => {
                               <td>{new Date(article.createdAt).toLocaleString()}</td>
                               <td>{article.author.firstName} {article.author.lastName}</td>
                               <td>
-                                    <button className='btn btn-dark'>Düzenle</button>
-                                    <button className='btn btn-danger ms-3'>Sil</button>
+                                    <button onClick={() => router.push(`/admin/articles/edit/${article.slug}`)} className='btn btn-dark'>Düzenle</button>
+                                    <button onClick={() => handleDelete(article.slug)} className='btn btn-danger ms-3'>Sil</button>
                               </td>
                         </tr>
                   ))}
