@@ -952,7 +952,7 @@ body, .mainHeader {
     height: 390px;
 
     & .signInText {
-      left: 340px;
+      left: 420px;
       height: 390px;
       position: absolute;
       width: 300px;
@@ -1015,7 +1015,7 @@ body, .mainHeader {
 
     & .signUpText {
       position: absolute;
-      left: 639px;
+      left: 719px;
       width: 300px;
       height: 390px;
       display: flex;

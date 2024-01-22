@@ -24,7 +24,7 @@ const LoginPage = () => {
   
   return (
     <>
-    <h3>login panel'in position'ı 1280px e göre ayarlandı. Ekran geçişlerine bakmak için 1280px e geçip kontrol edin. (DÜZENLENECEK!!)</h3>
+    <h3>login panel'in position'ı 1440px e göre ayarlandı. Ekran geçişlerine bakmak için 1440px e geçip kontrol edin. (DÜZENLENECEK!!)</h3>
     <div className="containerLoginPage">
       <div className="signInPage">
         <h1>Giriş Yap</h1>

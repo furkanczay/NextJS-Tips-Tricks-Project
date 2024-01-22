@@ -30,7 +30,7 @@ const MainHeader = () => {
                 </div>
                 <div className="logSign">
                     <Link href={'/auth/login'} className='logIn'>Giriş Yap</Link>
-                    <Link href={'#'} className='signUp'>Üye Ol</Link>
+                    {/* <Link href={'#'} className='signUp'>Üye Ol</Link> */}
                 </div>
             </header>
         </>
