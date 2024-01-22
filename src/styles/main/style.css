@@ -23,7 +23,9 @@ body, .mainHeader {
   justify-content: space-between;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  background: linear-gradient(60deg, #D2E3C8, #86A789, #739072, #4F6F52);
+  background: linear-gradient(60deg, #28A7ED, #A337F6, #E84D70);
+
+  /* #E84D70, #A337F6, #28A7ED */
 
   & h1 {
     color: #FFF;
@@ -55,9 +57,6 @@ body, .mainHeader {
     }
   }
 
-  
-
-
   & .logSign {
     display: flex;
     gap: 8px;
@@ -65,7 +64,7 @@ body, .mainHeader {
 
     & .logIn {
       border-radius: 5px;
-      background: linear-gradient(60deg, #D2E3C8, #86A789, #739072, #4F6F52);
+      background: linear-gradient(60deg, #28A7ED, #A337F6, #E84D70);
       color: #fff;
       padding: 8px 12px;
       color: #F2F4FE;
@@ -77,15 +76,13 @@ body, .mainHeader {
       transition: transform 2s;
 
       &:hover {
-        box-shadow: 0 0 20px 5px #D2E3C8;
-        background-color: #D2E3C8;
-        transform: rotateY(360deg);
+        box-shadow: 0 0 20px 5px #28A7ED;
       }
     }
 
     & .signUp {
       border-radius: 5px;
-      background: linear-gradient(60deg, #D2E3C8, #86A789, #739072, #4F6F52);
+      background: linear-gradient(60deg, #28A7ED, #A337F6, #E84D70);
       color: #fff;
       padding: 8px 12px;
       color: #F2F4FE;
@@ -96,8 +93,7 @@ body, .mainHeader {
       cursor: pointer;
 
       &:hover {
-        box-shadow: 0 0 20px 5px #D2E3C8;
-        background-color: #D2E3C8;
+        box-shadow: 0 0 20px 5px #28A7ED;
       }
     }
   }
@@ -197,7 +193,7 @@ body, .mainHeader {
       padding: 62px 77px 24px 24px;
       /* background-image: url('/images/oval.png'); */
       background-repeat: round;
-      background: #1B4242;
+      background: linear-gradient(60deg, #28A7ED, #A337F6, #E84D70);
       border-radius: 10px;
 
       & h3 {
@@ -307,7 +303,7 @@ body, .mainHeader {
   justify-content: space-between;
   align-items: center;
   border-radius: 10px;
-  background: #1B4242; 
+  background: linear-gradient(60deg, #28A7ED, #A337F6, #E84D70);
   padding: 24px;
   margin-bottom: 24px;
 
@@ -344,7 +340,7 @@ body, .mainHeader {
       & select {
         border: none;
         color: #FFF;
-        background-color: #1B4242
+        background-color: transparent;
       }
     }
   }
@@ -685,8 +681,7 @@ body, .mainHeader {
   padding: 20px 20px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  background: linear-gradient(60deg, #4F6F52, #739072, #86A789, #D2E3C8);
-
+  background: linear-gradient(60deg, #E84D70, #A337F6, #28A7ED);
 
   & .footerTop {
     display: flex;
@@ -774,7 +769,7 @@ body, .mainHeader {
 
       & button {
         border-radius: 5px;
-        background: linear-gradient(60deg, #4F6F52, #739072, #86A789, #D2E3C8);
+        background: linear-gradient(60deg, #E84D70, #A337F6, #28A7ED);
         padding: 8px 12px;
         border: none;
         color: #F2F4FE;
@@ -787,7 +782,7 @@ body, .mainHeader {
 
         &:hover {
           background-color: #C75AF6;
-          transform: rotateY(360deg);
+          /* transform: rotateY(360deg); */
         }
       }
     }
